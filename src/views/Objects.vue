@@ -1,162 +1,131 @@
 <template>
   <div class="objects">
-    <h1 class="h1_1">Сегодня</h1>
     {{ whats__week }}
-    <h2 class="h1_1">{{ Day }}</h2>
-    <div v-for="item in Objects__today" :key="item.name">
-      <div v-if="item.checked">
+    <button @click="delete__it()" name="button">смотрим</button>
+    <h2>{{ Day }}</h2>
+    <div class="objects__all">
+      <div class="objects__e">
+        <p>Чётная</p>
+        <div v-for="item in Objects__even" :key="item.name"
+        class="object" v-bind:style="{ 'background-color': item.object_color}">
         {{ item.name }}
+        </div>
       </div>
-    </div>
-    <div v-if="!Day">
-      <button @click="now__time()" name="button">Показать</button>
-    </div>
-    <div v-else>
-      <button @click="delete__it()" name="button">Скрыть</button>
+      <div class="objects__o">
+        <p>Нечётная</p>
+        <div v-for="item in Objects__odd" :key="item.name"
+        class="object" v-bind:style="{ 'background-color': item.object_color}">
+        {{ item.name }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
 export default {
   data() {
     return {
-      Objects: [
-        {name: 'Английский язык', checked: false},
-        {name: 'Русский язык и культура речи', checked: false},
-        {name: 'Основы программирования', checked: false},
-        {name: 'Организация вычислительных систем', checked: false},
-        {name: 'Физкультура', checked: false},
-        {name: 'Основы права', checked: false},
-        {name: 'Введение в сквозные цифровые технологии', checked: false},
-        {name: 'Математика', checked: false},
-        {name: 'Дискретная математика', checked: false},
-        {name: 'Отдых', checked: false}
-      ],
       Day: "",
       even: [[8, 1, 0, 5, 9, 9], [9, 2, 2, 2, 9, 9],
       [7, 7, 4, 3, 9, 9], [9, 6, 1, 3, 3, 9],
-      [9, 9, 0, 5, 9, 9], [9, 9, 4, 9, 9, 9]],
+      [9, 9, 0, 5, 9, 9], [9, 9, 4, 9, 9, 9],
+      [9,9,9,9,9,9]],
       odd: [[8, 8, 0, 5, 9, 9], [9, 9, 2, 2, 9, 9],
       [7, 7, 4, 6, 9, 9], [9, 6, 1, 9, 9, 9],
-      [9, 9, 0, 9, 9, 9], [9, 9, 4, 9, 9, 9]],
-      Objects__today: [],
-      even_week: true,
-      week: ""
+      [9, 9, 0, 9, 9, 9], [9, 9, 4, 9, 9, 9],
+      [9,9,9,9,9,9]],
+      Objects__even: [],
+      Objects__odd: [],
+      even_week: false,
+      week: "",
+      day: 1,
+      Objects: [
+        {name: 'Английский язык'},
+        {name: 'Русский язык и культура речи'},
+        {name: 'Основы программирования'},
+        {name: 'Организация вычислительных систем'},
+        {name: 'Физкультура'},
+        {name: 'Основы права'},
+        {name: 'Введение в сквозные цифровые технологии'},
+        {name: 'Математика'},
+        {name: 'Дискретная математика'},
+        {name: 'Отдых', object_color: '#ddd'}
+      ]
     }
   },
   computed: {
     whats__week: function() {
       this.whats();
-      return this.week;
+      this.now__time();
+      return "";
     }
   },
   methods: {
     now__time: function() {
-      let day = new Date()
+      // let day = new Date()
       if (this.even_week) {
-        switch (day.getDay()) {
+        switch (this.day) {
           case 1:
           this.Day = "Понедельник"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[0][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[0][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[0][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[0][i]]);
           break;
           case 2:
           this.Day = "Вторник"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[1][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[1][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[1][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[1][i]]);
           break;
           case 3:
           this.Day = "Среда"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[2][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[2][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[2][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[2][i]]);
           break;
           case 4:
           this.Day = "Четверг"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[3][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[3][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[3][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[3][i]]);
           break;
           case 5:
           this.Day = "Пятница"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[4][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[4][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[4][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[4][i]]);
           break;
           case 6:
           this.Day = "Суббота"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.even[5][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.even[5][i]])
-          }
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[5][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[5][i]]);
           break;
           default:
-          this.Day = "Воскресенье"
-          break;
-        }
-      } else {
-        switch (day.getDay()) {
-          case 1:
-          this.Day = "Понедельник"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[0][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[0][i]])
-          }
-          break;
-          case 2:
-          this.Day = "Вторник"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[1][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[1][i]])
-          }
-          break;
-          case 3:
-          this.Day = "Среда"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[2][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[2][i]])
-          }
-          break;
-          case 4:
-          this.Day = "Четверг"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[3][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[3][i]])
-          }
-          break;
-          case 5:
-          this.Day = "Пятница"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[4][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[4][i]])
-          }
-          break;
-          case 6:
-          this.Day = "Суббота"
-          for (let i = 0; i < 6; i++) {
-            this.Objects[this.odd[5][i]].checked = true;
-            this.Objects__today.push(this.Objects[this.odd[5][i]])
-          }
-          break;
-          default:
-          this.Day = "Воскресенье"
+          this.Day = "Воскресенье";
+          for (let i = 0; i < 6; i++)
+          this.Objects__even.push(this.Objects[this.even[6][i]]);
+          for (let i = 0; i < 6; i++)
+          this.Objects__odd.push(this.Objects[this.odd[6][i]]);
           break;
         }
       }
     },
     delete__it: function() {
-      this.Day = "";
-      return this.Objects__today = [];
+      this.Objects__even = [];
+      this.Objects__odd = [];
+      if (this.day < 7) return this.day += 1;
+      else {
+        return this.day = 1;
+      }
     },
     whats() {
       let year = new Date().getFullYear();
@@ -180,5 +149,15 @@ export default {
 <style scoped>
   .h1_1 {
     margin-top: 0;
+  }
+  .object {
+    height: 75px;
+    width: 200px;
+    margin: auto;
+  }
+  .objects__all {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
   }
 </style>
