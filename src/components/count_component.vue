@@ -6,7 +6,7 @@
       <div v-html="item.html"></div>
     </div>
   </div>
-  <input v-on:keyup.enter="onEnter" id="durak" type="text">
+  <input autocomplete="off" v-on:keyup.enter="onEnter" id="durak" type="text">
   <button @click="AddIt()">нажми на меня</button>
 </template>
 
