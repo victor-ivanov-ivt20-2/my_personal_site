@@ -4,9 +4,10 @@
       <div id="nav">
         <router-link to="/"><img src="./assets/logo.png" alt="ну да" height="50" width="50"></router-link>
         <ul class="menu_ul">
-          <li class="menu-item"><router-link to="/count">Count page</router-link></li>
+          <li class="menu-item"><router-link to="/count">Пообщаться с собой</router-link></li>
+          <li class="menu-item"><router-link to="/objects">Расписание занятий</router-link></li>
         </ul>
-        <div class="menu-about"><router-link to="/about">About</router-link></div>
+        <div class="menu-about"><router-link to="/about">Обо мне</router-link></div>
       </div>
     </div>
   </header>
